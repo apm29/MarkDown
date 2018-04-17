@@ -108,4 +108,4 @@ private void setupMetrics() {
 > 在启用监听的情况下首先
   * 获取方法的签名来区分是OnResume还是其他什么的
   * 获取了ActivityLifecycleMetrics实例在onResume执行前后分别调用logOreXXX 和 logPostXXX方法,很明显是打log用的
-  * ActivityLifecycleMetrics自己维护了一个LinkedhashMap存放已经记录过得ActivityMetric对象,而ActivityMetric对象保存了一个Activity的 1. 状态 2. 各个生命周期耗时
+  * ActivityLifecycleMetrics自己维护了一个LinkedhashMap存放已经记录过得ActivityMetric对象,而ActivityMetric对象保存了一个Activity的 1. 状态 2. 各个生命周期耗时 3.是否实现了各个生命周期方法 4.各个状态的time
