@@ -1,66 +1,6 @@
 
 ## Flutter
 
-<<<<<<< HEAD
-### Container
-* 没有父布局的时候填充整个屏幕
-* color和decoration只可有一个
-* padding: child与边界的距离
-* contraint:让文字有足够的垂直空间,并且水平延伸来适应父控件
-* 旋转偏移等transfromation之后:container占据的位置不变的
-
-### Dismissible
-* 滑动删除组件(类似iOS)
-* 可以设定滑动方向
-* 设定滑动成功事件
-* 代码例子
-```js
-Widget _buildBody() {
-    print(_list.length);
-    scrollController.addListener(() {
-      print("position:" + scrollController.position.pixels.toString());
-      print("offset:" + scrollController.offset.toString());
-    });
-    return new ListView.builder(
-      controller: scrollController,
-      physics: new BouncingScrollPhysics(),
-      itemBuilder: (context, index) {
-        final item = _list[index];
-        return new Dismissible(
-          key: new Key(item),
-          child: new Container(
-            height: 200.0,
-            child: new Align(child: new Text(item)),
-          ),
-          background: new Container(
-            color: Colors.red,
-            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            alignment: Alignment.centerRight,
-            child: new Text(
-              'Delete',
-              textAlign: TextAlign.center,
-              style: new TextStyle(color: Colors.white, fontSize: 20.0),
-            ),
-          ),
-          onDismissed: (direction) {
-            Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text(
-                    'Item $item Removed',
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(color: Colors.white, fontSize: 20.0),
-                  ),
-                  duration: new Duration(seconds: 3),
-                ));
-          },
-        );
-      },
-      itemCount: _list.length,
-    );
-  }
-```
-
-=======
->>>>>>> eb11d36fb2643a74ccd927aad6ab0cdd46aeee84
 # Get Started: Install on Windows
 ### INFO
 > 大部分来自 https://flutter.io
@@ -219,6 +159,61 @@ void main() {
 * padding: child与边界的距离
 * contraint:让文字有足够的垂直空间,并且水平延伸来适应父控件
 * 旋转偏移等transfromation之后:container占据的位置不变的
+
+
+
+### Dismissible
+* 滑动删除组件(类似iOS)
+* 可以设定滑动方向
+* 设定滑动成功事件
+* 代码例子
+```js
+Widget _buildBody() {
+    print(_list.length);
+    scrollController.addListener(() {
+      print("position:" + scrollController.position.pixels.toString());
+      print("offset:" + scrollController.offset.toString());
+    });
+    return new ListView.builder(
+      controller: scrollController,
+      physics: new BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        final item = _list[index];
+        return new Dismissible(
+          //key用于复用
+          key: new Key(item),
+          child: new Container(
+            height: 200.0,
+            child: new Align(child: new Text(item)),
+          ),
+          //background决定了背景(滑动露出来的部分)
+          background: new Container(
+            color: Colors.red,
+            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+            alignment: Alignment.centerRight,
+            child: new Text(
+              'Delete',
+              textAlign: TextAlign.center,
+              style: new TextStyle(color: Colors.white, fontSize: 20.0),
+            ),
+          ),
+          //滑动完成回调
+          onDismissed: (direction) {
+            Scaffold.of(context).showSnackBar(new SnackBar(
+                  content: new Text(
+                    'Item $item Removed',
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
+                  duration: new Duration(seconds: 3),
+                ));
+          },
+        );
+      },
+      itemCount: _list.length,
+    );
+  }
+```
 
 ### AnimatedList
 * 在创建的时候带入一个GlobalKey,用于InsertItem 和 RemoveItem
