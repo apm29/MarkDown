@@ -2,6 +2,7 @@
 
 #### Usage
 > Gradle引入
+* 写的时候版本还是1.0.0-alpha1
 
 ```
    implementation "android.arch.navigation:navigation-fragment:$versions.navigation"
