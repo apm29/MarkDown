@@ -217,3 +217,66 @@ Widget _buildBody() {
 
 ### AnimatedList
 * 在创建的时候带入一个GlobalKey,用于InsertItem 和 RemoveItem
+
+
+### margin/padding
+
+> EdgeInsets is a class that will generate the appropiate margins. It has some fancy constructors:
+
+* `EdgeInsets.only(left, top, right, bottom)`: allows us to define different margins per side. All them are optional, so you can specify, for example, only left and top.
+* `EdgeInsets.fromLTRB(left, top, right, bottom)`: similar to previous, but, you have to specify the four margins with positional parameters. The LTRB is a nmemonic rule (Left, Top, Right, Bottom).
+* `EdgeInsets.all(value`): sets the same margin for all four sides.
+* `EdgeInsets.symmetric(vertical, horizontal)`: allows us to specify top/bottom and/or left/right with a single value.
+
+
+### Enter the `Slivers`
+Despite our list is now fully working as intended, I want to introduce you to the use of `Slivers`.
+
+`Slivers` are a very powerful tool, and the scrollable Widgets are based on internal use of `Slivers`.
+
+A `Sliver` is a piece of scrollable content. `Slivers` should be placed inside a `ScrollView` widget. The basic class to create a `ScrollView` is `CustomScrollView` which allows a list of `Slivers` as children. There are several `ScrollView` classes, and reviewing all them goes beyond this article.
+
+There are also several `Slivers`, these are some of them:
+
+`SliverAppBar`: used to create a collapsable material AppBar.
+`SliverList`: a linear list of items.
+`SliverFixedExtentList`: similar to the previous one, but for items with fixed height.
+`SliverToBoxAdapter`: a sliver with a single child with a defined size.
+`SliverPadding`: a simple sliver that contains antoher Sliver and allows us to apply a padding.
+
+### Route
+```java
+return new GestureDetector(
+   onTap: () => Navigator.of(context).push(new PageRouteBuilder(
+     pageBuilder: (_, __, ___) => new DetailPage(planet),
+   )),
+   child: new Container(
+     height: 120.0,
+     margin: const EdgeInsets.symmetric(
+       vertical: 16.0,
+       horizontal: 24.0,
+    ),
+    child: new Stack(
+      children: <Widget>[
+        planetCard,
+        planetThumbnail,
+      ],
+    ),
+  )
+);
+```
+> Now, instead of recovering the `PageRoute` from the table of routes with pushNamed we are creating a new one using the class `PageRoutBuilder`, and it has a parameter named pageBuilder that should return a new Widget to show as page, in this case, DetailPage receiving as a parameter the planet to show.
+
+### Hero动画
+
+```java
+new Hero(
+      tag: "planet-hero-${planet.id}",
+      child: new Image(
+      image: new AssetImage(planet.image),
+     height: 92.0,
+      width: 92.0,
+    ),
+  ),
+```
+> 给两个不同页面的Widget包裹Hero,打上相同的tag,在页面跳转时(Navigator.push...等)会执行hero动画
