@@ -280,3 +280,20 @@ new Hero(
   ),
 ```
 > 给两个不同页面的Widget包裹Hero,打上相同的tag,在页面跳转时(Navigator.push...等)会执行hero动画
+
+# 隐藏keyboard
+* 方法一
+
+```js
+//把一个新的FocusNode作为新焦点,这样其他的控件(比如TextField TextFormField)会失去焦点,从而隐藏键盘
+FocusScope.of(context).requestFocus(new FocusNode());
+```
+> 相应的,请求焦点也可以用这个方法
+
+* 方法二
+
+> 比较Hacky的方法
+
+```js
+SystemChannels.textInput.invokeMethod('TextInput.clearClient');
+```
