@@ -43,14 +43,14 @@ kapt {
 * 简单的绑定（单向绑定）
 
   * 1.先编写一个kotlin的bean类(可以直接用data class)
-    ```js
+    ```kotlin
       data class MyBean(
           var name:String
       )
     ```
   * 2.在xml中使用`@{bean.field}`
   * 3.在Activity/Fragment中设置：
-  ```js
+  ```kotlin
   val applicantInfoBinding = DataBindingUtil.setContentView<ActivityMyBeanBinding>(this, R.layout.activity_my_bean)
   ```
   其中ActivityMyBeanBinding是Databinding生成的类,继承自`android.databinding.ViewDataBinding `
@@ -66,7 +66,7 @@ kapt {
     * 属性的set方法最后调用`notifyPropertyChanged`方法
     * 如果一个属性需要逻辑处理为其他类型比如Int->String,可以写setXXX/getXXX方法,XXX可以自己定义但是get/set方法要对应,然后我们在xml中可以以`@={bean.XXX}`的形式双向绑定该XXX
   * 2.普通的属性
-  ```js
+  ```kotlin
   @Bindable//这个bindable可以只放在get方法
    var id: Int = 0
        set(value) {
@@ -80,7 +80,7 @@ kapt {
        }
   ```
   * 3.自定的属性
-  ```js
+  ```kotlin
     var repayment_type: Int = 0//back field
 
    @Bindable
